@@ -12,15 +12,22 @@ struct SecondUiView: View {
     @State var musicArray : [MyMusic]
     
     var body: some View {
-        List{
-            let searchResults = searchMusic(for: selctedSingerName) // User's search input
-            
-            Section(selctedSingerName) {
-                ForEach(searchResults , id:\.id) { musicData in
-                    Text(musicData.musicName)
+        NavigationView {
+            List{
+                let searchResults = searchMusic(for: selctedSingerName) // User's search input
+                
+                Section(selctedSingerName) {
+                    NavigationLink("Sarch about Singer", destination: ThirdUiView(searchContent: "\(selctedSingerName)"))
+                    
+                    ForEach(searchResults , id:\.id) { musicData in
+                        Text(musicData.musicName)
+                    }
                 }
             }
+            .navigationBarTitle("List of songs", displayMode: .inline)
         }
+
+
     }
     
     
